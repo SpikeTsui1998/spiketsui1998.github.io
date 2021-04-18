@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | 模拟信号AnalogSignals</title>
+  <title>optee | 模拟信号AnalogSignals</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个分享动画、漫画、音乐、游戏、泛二次元生活的播客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="模拟信号AnalogSignals">
-<meta property="og:url" content="http://example.com/archives/2021/index.html">
+  <meta name="description" content="OP-TEE1 概要1.1 TEE的设计目标 隔离 占用空间小 便于移植  1.2 OP-TEE的组成 安全权限层级：可以执行Arm安全PL-1 (v7-A)或EL-1 (v8-A)级别。 安全用户空间库：为受信任的应用而设计的库 Linux内核的TEE框架和驱动程序：在v4.12中已经合并到官方的工具树中 Linux用户空间库：遵循 GlobalPlatform TEE Client API 标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="optee">
+<meta property="og:url" content="http://example.com/2021/04/18/optee/index.html">
 <meta property="og:site_name" content="模拟信号AnalogSignals">
-<meta property="og:description" content="一个分享动画、漫画、音乐、游戏、泛二次元生活的播客">
+<meta property="og:description" content="OP-TEE1 概要1.1 TEE的设计目标 隔离 占用空间小 便于移植  1.2 OP-TEE的组成 安全权限层级：可以执行Arm安全PL-1 (v7-A)或EL-1 (v8-A)级别。 安全用户空间库：为受信任的应用而设计的库 Linux内核的TEE框架和驱动程序：在v4.12中已经合并到官方的工具树中 Linux用户空间库：遵循 GlobalPlatform TEE Client API 标">
 <meta property="og:locale">
+<meta property="og:image" content="e:/深研展讯BSP/笔记/pdf及图片/tee_invoke.png">
+<meta property="og:image" content="e:/深研展讯BSP/笔记/pdf及图片/irq.png">
+<meta property="og:image" content="e:/深研展讯BSP/笔记/pdf及图片/fiq.png">
+<meta property="og:image" content="e:/深研展讯BSP/笔记/pdf及图片/irq_fiq.png">
+<meta property="article:published_time" content="2021-04-18T14:29:07.000Z">
+<meta property="article:modified_time" content="2021-04-18T14:30:35.871Z">
 <meta property="article:author" content="SpikeTsui">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="e:/深研展讯BSP/笔记/pdf及图片/tee_invoke.png">
   
     <link rel="alternative" href="/atom.xml" title="模拟信号AnalogSignals" type="application/atom+xml">
   
@@ -152,103 +159,312 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-optee" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      optee
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/18/optee/" class="archive-article-date">
+
+        
+        <a href="/2021/04/18/optee/" class="archive-article-date">
   	<time datetime="2021-04-18T14:29:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/18/optee/">optee</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="OP-TEE"><a href="#OP-TEE" class="headerlink" title="OP-TEE"></a>OP-TEE</h1><h2 id="1-概要"><a href="#1-概要" class="headerlink" title="1 概要"></a>1 概要</h2><h3 id="1-1-TEE的设计目标"><a href="#1-1-TEE的设计目标" class="headerlink" title="1.1 TEE的设计目标"></a>1.1 TEE的设计目标</h3><ol>
+<li>隔离</li>
+<li>占用空间小</li>
+<li>便于移植</li>
+</ol>
+<h3 id="1-2-OP-TEE的组成"><a href="#1-2-OP-TEE的组成" class="headerlink" title="1.2 OP-TEE的组成"></a>1.2 OP-TEE的组成</h3><ol>
+<li>安全权限层级：可以执行Arm安全PL-1 (v7-A)或EL-1 (v8-A)级别。</li>
+<li>安全用户空间库：为受信任的应用而设计的库</li>
+<li>Linux内核的TEE框架和驱动程序：在v4.12中已经合并到官方的工具树中</li>
+<li>Linux用户空间库：遵循 GlobalPlatform <a target="_blank" rel="noopener" href="https://optee.readthedocs.io/en/latest/architecture/globalplatform_api.html#tee-client-api">TEE Client API</a> 标准</li>
+<li>Linux用户空间请求守护进程(tee-supplicant)：</li>
+<li>测试工具组：用于进行回归测试和API的相容性测试</li>
+<li>一个git范例：几个简单的host和TA案例</li>
+<li>编译脚本、调试工具</li>
+</ol>
+<h3 id="1-3-OP-TEE历史"><a href="#1-3-OP-TEE历史" class="headerlink" title="1.3 OP-TEE历史"></a>1.3 OP-TEE历史</h3><ul>
+<li>2013 ST-Ericsson 的TEE项目研究成果符合GlobalPlatform标准</li>
+<li>同年ST-Erisson 公司破产，该项目归ST公司所有</li>
+<li>同年 Linaro公司成立安全小组（Security Working Group SWG）寻求ST进行合作，开始着手TEE项目</li>
+<li>2014.6.12 OP-TEE项目在github上建立，由ST所有，并由ST和Linaro共同维护</li>
+<li>2015 OP-TEE项目转归Linaro所有并维护</li>
+<li>2019 OP-TEE项目转归TrustedFirmware.org project所有并维护</li>
+</ul>
+<h2 id="2-编码规范"><a href="#2-编码规范" class="headerlink" title="2 编码规范"></a>2 编码规范</h2><p>（无）</p>
+<h2 id="3-架构"><a href="#3-架构" class="headerlink" title="3 架构"></a>3 架构</h2><h3 id="3-1-内核"><a href="#3-1-内核" class="headerlink" title="3.1 内核"></a>3.1 内核</h3><h4 id="3-1-1-中断处理"><a href="#3-1-1-中断处理" class="headerlink" title="3.1.1 中断处理"></a>3.1.1 中断处理</h4><p>中断处理的情形是 IRQ/FIQ 异常，这种异常也可能意味着安全空间和非安全空间的切换：normal world —&gt; secure world或者是secure world —&gt; normal world</p>
+<h5 id="（secure-normal）环境切换的例子"><a href="#（secure-normal）环境切换的例子" class="headerlink" title="（secure/normal）环境切换的例子"></a>（secure/normal）环境切换的例子</h5><ol>
+<li>环境切换是通过core的monitor level/mode的实现的，可以理解成是由Monitor这个机制实现的</li>
+<li>normal world调用secure world时，normal world会执行一个SMC指令，SMC异常总会被Monitor捕捉到，如果目标服务是TOS，则Monitor会切换到secure world下执行相关命令；如果在optee_os下执行了SMC指令，同样也会被Monitor捕捉到，然后从secure world切换到normal world。</li>
+<li>当Arm GIC发出安全中断信号（secure interrupt）时，安全中断（secure interrupt）必须访问optee_os中断异常向量。如果secure world正在运行，optee_os将直接从异常向量开始处理中断；如果安全中断引发时normal world正在运行，那么Monitor向量必须处理异常并调用optee_os来为中断提供服务。</li>
+<li>当 Arm GIC发出非安全中断信号时，该中断信号必须访问normal world的中断异常向量。如果normal world 正在运行，系统将从该中断向量开始处理中断；如果当非安全中断到达时secure world正在运行，optee_os将通过Monitor暂时返回到normal world，让normal world为中断服务。</li>
+</ol>
+<h5 id="内核异常向量"><a href="#内核异常向量" class="headerlink" title="内核异常向量"></a>内核异常向量</h5><ol>
+<li>Monitor在normal world或secure world运行时被访问。</li>
+<li>Monitor通过SCR_NS这个标志位了解到当前是处于normal world还是secure world：SCR_NR=0(secure world) SCR_NR=1(normal world)</li>
+<li>Monitor的访问：可以通过如下几种方式访问Monitor：SMC异常、IRQ或FIQ异常（一般叫做中断）、异步中断（asynchronous aborts）。对于Monitor的执行来说，monitor的中止（data, prefetch, undef）是本地的。</li>
+<li>Monitor可以位于optee_os的外部（case：CFG_WITH_ARM_TRUSTED_FW=y），如果没有，则提供一个local secure monitor</li>
+<li>Monitor之外执行时，系统要么在normal world(SCR_NS=1)中执行，要么在secure world(SCR_NS=0)中执行。每个world都有自己的异常向量表exception vector table(状态向量)：<ul>
+<li><code>VBAR_EL2</code> or <code>VBAR_EL1</code> non-secure or <code>VBAR_EL1</code> secure for AArch64.</li>
+<li><code>HVBAR</code> or <code>VBAR</code> non-secure or <code>VBAR</code> secure for Armv7-A and AArch32.</li>
+</ul>
+</li>
+<li>所有的SMC异常都可以被Monitor捕捉。IRQ/FIQ异常（中断）可以被Monitor向量或执行环境（指secure world or normal world）的状态向量捕捉。</li>
+<li>路由配置<br>normal world运行时：secure 中断指向Monitor，并转发给optee_os；non-secure中断指向执行环境异常中断<br>secure world运行时：secure和non-secure中断均指向正在运行的optee_os的异常中断，而optee_os一定会将non-secure中断转发到normal world。</li>
+<li>Optee_os的non-secure中断一定会被当前运行环境的状态向量捕捉，这是由SCR_(IRQ|FIQ)这个静态变量所反映的。</li>
+</ol>
+<h5 id="内部和外部中断"><a href="#内部和外部中断" class="headerlink" title="内部和外部中断"></a>内部和外部中断</h5><ol>
+<li><p>两种在optee_os中定义的中断：<br>内部中断（<strong>native interrupt</strong>）：被optee_os处理的中断，比如：<strong>secure interrupt</strong><br>外部中断（<strong>foreign interrupt</strong>）：不被optee_os处理的中断，比如：<strong>non-secure interrupt</strong>是被normal world处理</p>
+</li>
+<li><p>对于Arm GICv2模式，内部中断以FIQ的形式发送，外部中断以IRQ的形式发送。</p>
+</li>
+<li><p>对于Arm GICv3模式，外部中断以FIQ的形式发送，可以由secure world (aarch32 Monitor mode或aarch64 EL3)或normal world处理。</p>
+</li>
+<li><p>Arm GICv3模式的使能方式是CFG_ARM_GICV3=y</p>
+</li>
+<li><p>本文档选择 GICv2 模式，并且将IRQ称为optee_os的外部中断，FIQ称为optee_os的内部中断</p>
+</li>
+<li><p>内部中断（<strong>native interrupt</strong>：case secure interrupt）必须经安全路由到optee_os。</p>
+<p>外部中断（<strong>foreign interrupt</strong>：case non-secure interrupt）当外部中断在secure world运行期间被捕获时，可能需要经有效路由到normal world。</p>
+</li>
+</ol>
+<h5 id="normal-world通过SMC调用optee-os"><a href="#normal-world通过SMC调用optee-os" class="headerlink" title="normal world通过SMC调用optee_os"></a>normal world通过SMC调用optee_os</h5><ol>
+<li><p>进入secure monitor</p>
+<ol>
+<li><p>Monitor 管理着所有secure world的入口。</p>
+</li>
+<li><p>step1 使用通用寄存器或系统寄存器存储normal world的状态（指一些寄存器的状态），并resume restore的secure world状态<br> step2 返回一个执行异常，并继续restore secure状态。从secure world到normal world也是一样的</p>
+</li>
+<li><p>一些通用寄存器在进入和退出时不保存和恢复，它们用于在secure和normal world之间传递参数</p>
+</li>
+</ol>
+</li>
+<li><p>进入和退出TOS<br>在进入和退出TOS时，每个CPU都使用一个单独的入口堆栈，并且在进入过程中，IRQ和FIQ是处于阻塞态的（这里的中断阻塞是通过中断屏蔽实现的）。smc分为两类：fast 和 standard。</p>
+<ol>
+<li><p>对于fast SMC：optee_os会在entry stack上运行，并且会阻塞IRQ/FIQ，直到执行返回到normal world</p>
+</li>
+<li><p>对于standard SMC：optee_os会在某个时刻执行所请求的服务，同时取消中断阻塞态。为了处理中断（主要是为了转发外部中断）<strong>，optee_os会为SMC请求创建一个trusted thread，这个trusted thread存储有所请求服务的执行上下文。当请求的服务执行或中断时，可以挂起（suspend）或restore此上下文。只有当服务执行以完成状态返回时，trust thread才会被释放。</strong></p>
+</li>
+</ol>
+<p>对于standard SMCs, optee_os分配或restore一个trusted thread，然后解除IRQ/FIQ的阻塞。当optee_os需要从外部中断或远程服务调用normal world时，optee_os会阻塞IRQ/FIQ并挂起trusted thread。挂起时，optee_os回到entry stack</p>
+<ol start="3">
+<li>fast和standard SMC都在entry stack上结束，IRQ/FIQ被阻塞，optee_os通过SMC调用Monitor返回正常世界。</li>
+</ol>
+</li>
+<li><p>SMC entry to secure world：TEE invoke TEE调用图<br>mask：屏蔽<br>eret：异常返回，就是异常<br><img src="E:\深研展讯BSP\笔记\pdf及图片\tee_invoke.png"></p>
+</li>
+</ol>
+<h5 id="向normal-world传送不安全的中断non-secure-interrupt"><a href="#向normal-world传送不安全的中断non-secure-interrupt" class="headerlink" title="向normal world传送不安全的中断non-secure interrupt"></a>向normal world传送不安全的中断non-secure interrupt</h5><p>本部分选用Arm GICv1/v2的协定：即<strong>IRQ</strong>是不安全中断<strong>non-secure interrupt</strong>，而<strong>FIQ</strong>信号是安全中断<strong>secure interrupt</strong>。在GICv3的协定中，则是相反的。</p>
+<h6 id="将外部中断从secure-world转发到normal-world"><a href="#将外部中断从secure-world转发到normal-world" class="headerlink" title="将外部中断从secure world转发到normal world"></a>将外部中断从<strong>secure world</strong>转发到<strong>normal world</strong></h6><p>（外部中断是指不被tos处理的中断，比如non-secure interrupt就是不被tos处理的中断，这里是指IRQ）</p>
+<ol>
+<li><p>当IRQ在secure world中被接收为一个IRQ异常时，secure world会执行如下步骤：</p>
+<ul>
+<li>保存trusted thread上下文(Armv7-A所有处理器模式的完整状态)</li>
+<li>阻塞（屏蔽）所有中断（IRQ和FIQ）</li>
+<li>切换到entry stack</li>
+<li>发送一个有值的SMC来告诉normal world，IRQ已经发出去了，并且说明最后的SMC应该被继续调用</li>
+</ul>
+</li>
+<li><p>monitor使用一个返回码来恢复normal world的上下文，这个返回码表示IRQ即将会被交付。normal world会发布一个新的SMC，这个SMC要求normal world应该继续调用最后的SMC。</p>
+</li>
+<li><p>Monitor也会恢复secure world 的上下文，这个secure world的上下文呢有三个作用：</p>
+<ul>
+<li>定位先前保存的上下文</li>
+<li>并检查它是否是在恢复上下文之前从IRQ请求的返回</li>
+<li>允许secure world IRQ处理程序从一个即将运行的异常中返回</li>
+</ul>
+</li>
+<li><p>注意，monitor本身并不知道/关心它刚刚转发了一个IRQ到normal world，这种转发信息的统计是在tos中对trusted thread的处理中完成的。normal world负责决定secure world线程何时恢复运行（更多信息，参见线程处理Thread handing）</p>
+<p>irq：在secure world中接收IRQ，并且将其转发到normal world<br><img src="E:\深研展讯BSP\笔记\pdf及图片\irq.png"></p>
+</li>
+</ol>
+<h6 id="当SCR-NS-1时，向normal-world传送一个non-secure-interrupt"><a href="#当SCR-NS-1时，向normal-world传送一个non-secure-interrupt" class="headerlink" title="当SCR_NS=1时，向normal world传送一个non-secure interrupt"></a>当SCR_NS=1时，向normal world传送一个non-secure interrupt</h6><p>当（since）SCR_IRQ标志位被清除时，IRQ将在normal world中使用状态向量(VBAR)来传递。IRQ作为任何其他异常被normal world接收，Monitor和TOS根本不涉及。注：Optee_os的non-secure中断一定会被当前运行环境的状态向量捕捉，这是由SCR_(IRQ|FIQ)这个静态变量所反映的。</p>
+<h5 id="向secure-world传送安全中断secure-interrupt"><a href="#向secure-world传送安全中断secure-interrupt" class="headerlink" title="向secure world传送安全中断secure interrupt"></a>向secure world传送安全中断secure interrupt</h5><p>本节使用Arm GICv1/v2的协定：IRQ是non-secure中断，而FIQ是secure 中断。在GICv3的配置中，则是相反的。FIQ可以在两种不同的状态下被接收：在normal world(设置了SCR_NS)或secure world(清除了SCR_NS)。当secure monitor处于活动状态(Armv8-A EL3或Armv7-A的monitor mode)时，FIQ是被屏蔽的。下面介绍两种不同状态下的FIQ接收。</p>
+<h6 id="在SCR-NS-1时-向secure-world传送FIQ"><a href="#在SCR-NS-1时-向secure-world传送FIQ" class="headerlink" title="在SCR_NS=1时,向secure world传送FIQ"></a>在SCR_NS=1时,向secure world传送FIQ</h6><p>（SCR_NS=1时即为当前处于normal world的状态）</p>
+<p>monitor收到FIQ异常时会进行如下动作：</p>
+<ol>
+<li><p>保存normal world的上下文，并restore secure world的上下文（这次restore 的是上次从secure world退出时保存的），这整个动作将阻塞IRQ和FIQ</p>
+</li>
+<li><p>在clear SCR_NS的时候同时clear SCR_FIQ</p>
+</li>
+<li><p>Sets “FIQ” as parameter to secure world entry</p>
+</li>
+<li><p>发送一个从异常到 secure_上下文 的返回</p>
+</li>
+<li><p>secure world由于“FIQ”参数而屏蔽FIQ中断</p>
+</li>
+<li><p>使用状态向量将FIQ作为异常接收</p>
+</li>
+<li><p>在secure world里，状态向量句柄从异常返回</p>
+</li>
+<li><p>secure world发送一个SMC返回给normal world</p>
+</li>
+<li><p>monitor 保存secure world的上下文，并restore normal world 的上下文</p>
+</li>
+<li><p>发送一个从异常到 restore_上下文 的返回</p>
+<p>图：SCR_NS=1时接收FIQ<br><img src="E:\深研展讯BSP\笔记\pdf及图片\fiq.png"></p>
+</li>
+</ol>
+<p>图：在处理来自secure world转发的IRQ时接收FIQ<img src="E:\深研展讯BSP\笔记\pdf及图片\irq_fiq.png"></p>
+<h6 id="在SCR-NS-0时将FIQ传递给secure-world"><a href="#在SCR-NS-0时将FIQ传递给secure-world" class="headerlink" title="在SCR_NS=0时将FIQ传递给secure world"></a>在SCR_NS=0时将FIQ传递给secure world</h6><p>由于SCR_NS和SCR_FIQ都被清零了，所以FIQ会通过状态向量（VBAR）发送到secure world。FIQ会作为其它任何异常被TOS所接收，而monitor不会参与整个过程</p>
+<h5 id="Trusted-thread的调度"><a href="#Trusted-thread的调度" class="headerlink" title="Trusted thread的调度"></a>Trusted thread的调度</h5><h6 id="标准服务下的可信线程（trusted-thread）"><a href="#标准服务下的可信线程（trusted-thread）" class="headerlink" title="标准服务下的可信线程（trusted thread）"></a>标准服务下的可信线程（trusted thread）</h6><ol>
+<li>OP-TEE标准服务通过标准SMC进行的。这些服务的执行可以被外部中断所中断。为了挂起和restore服务的运行（execution），optee_os在标准SMCs entry处分配了一个可信线程。</li>
+<li>当optee_os以服务完成状态返回normal world时，可信线程终止。</li>
+<li>可信线程的执行可以被内部中断所中断。在这种情况下，内部中断由中断异常处理程序处理。并且，一旦处理完毕，optee_os就返回到可信线程的执行。</li>
+<li>可信线程的执行也可以被外部中断所中断。在这种情况下，optee_os会挂起可信线程，然后通过Monitor调用normal world（即optee_os所谓的RPC服务）。只有当normal world调用具有RPC服务状态的optee_os时，可信线程才会从中断恢复继续执行。</li>
+<li>一个可信的线程执行会导致optee_os在normal world里调用一个服务，比如访问一个文件，获取REE当前时间，等等。在远程服务（remote service）执行期间，可信线程会被挂起或恢复。</li>
+</ol>
+<h6 id="关于调度的注意事项"><a href="#关于调度的注意事项" class="headerlink" title="关于调度的注意事项"></a>关于调度的注意事项</h6><ol>
+<li>当一个可信线程被外部中断所中断，并且opte_os正在调用一个normal world的服务时，normal world有机会重新调度正在运行的applications。只有当客户端application被调度回来时，可信线程才会恢复。因此，因此，受信任线程的执行遵循 { [调用normal world的服务] 的上下文 } 的调度。</li>
+<li>Optee_os不实现任何线程调度。每个可信线程都应该跟踪从normal world调用的服务，并且应该返回该服务的运行状态。</li>
+<li>OP-TEE的Linux驱动程序(Linux内核4.12在drivers/tee/optee中实现)的设计是为了为在tee端调用OP-TEE的Linux线程分配一个可信线程。可信线程的执行与调用方Linux线程的执行相关联，Linux线程是在Linux内核调度决策下执行的。这意味着可信线程是由Linux内核调度的。</li>
+</ol>
+<h6 id="可信线程的约束"><a href="#可信线程的约束" class="headerlink" title="可信线程的约束"></a>可信线程的约束</h6><ol>
+<li>TEE core处理定量的可信线程，请参阅CFG_NUM_threads。</li>
+<li>可信线程只在内存受限的系统上比较耗费资源，主要是涉及到执行堆栈的大小。</li>
+<li>在SMP系统上，如果normal world支持进程调度，optee_os可以并行执行多个可信线程。即便是在UP系统中，optee_os中支持并行执行多个可信线程也可以帮助normal world的调度程序提高效率。</li>
+</ol>
+<h2 id="4编译和运行"><a href="#4编译和运行" class="headerlink" title="4编译和运行"></a>4编译和运行</h2><p>在文档的这一部分中，叙述如何构建一个完整的OP-TEE的developer setup或构建一个单独的组件。同时，该文档也会叙述如何在各种设备上运行OP-TEE。</p>
+<h3 id="OP-TEE-gits"><a href="#OP-TEE-gits" class="headerlink" title="OP-TEE gits"></a>OP-TEE gits</h3><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4><h5 id="manifest"><a href="#manifest" class="headerlink" title="manifest"></a>manifest</h5>
+      
 
-        <div class="article-info info-on-right">
-          
-          
-
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/18/optee/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2021-04-18T12:57:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的第一篇博客文章</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/11/hello-world/" class="archive-article-date">
-  	<time datetime="2021-04-11T14:07:24.892Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/11/hello-world/">Hello World</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -271,8 +487,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
